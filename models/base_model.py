@@ -2,10 +2,9 @@
 """
 BaseModel class definition
 """
-import models 
+import models
 from uuid import uuid4
 from datetime import datetime
-
 
 
 class BaseModel:
@@ -33,8 +32,6 @@ class BaseModel:
 
         models.storage.new(self)
 
-        
-
     def save(self):
         """
             updates the public instance attribute
@@ -43,7 +40,6 @@ class BaseModel:
 
         self.updated_at = datetime.today()
         models.storage.save()
-        
 
     def __str__(self):
         """
