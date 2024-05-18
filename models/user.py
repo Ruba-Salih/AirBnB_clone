@@ -2,7 +2,7 @@
 """
 User class definition
 """
-from models import BaseModel
+from models.base_model import BaseModel
 
 class User(BaseModel):
     """
