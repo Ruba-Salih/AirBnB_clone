@@ -38,13 +38,12 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         """EOF command to exit the program
         """
-        print("")
-        return True
+        exit(0)
 
     def do_quit(self, line):
         """Quit command to exit the program
         """
-        return True
+        exit(0)
 
     def do_create(self, line):
         """Creates a new instance of BaseModel
