@@ -4,6 +4,7 @@ import cmd
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -15,9 +16,9 @@ class HBNBCommand(cmd.Cmd):
 
     __cls = {
         "BaseModel": BaseModel,
-        "User": 0,
-        "State": 9,
-        "City": 4,
+        "User": User,
+        "State": 0,
+        "City": 0,
         "Place": 9,
         "Amenity": 8,
         "Review": 6
