@@ -17,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
     HBNBCommand class   the entry point of the command interpreter
     """
 
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
 
     __cls = {
         "BaseModel": BaseModel,
@@ -38,12 +38,12 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         """EOF command to exit the program
         """
-        exit(0)
+        return True
 
     def do_quit(self, line):
         """Quit command to exit the program
         """
-        exit(0)
+        return True
 
     def do_create(self, line):
         """Creates a new instance of BaseModel
