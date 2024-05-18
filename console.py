@@ -129,48 +129,48 @@ class HBNBCommand(cmd.Cmd):
 
             print(li)
 
-    def do_update(self, argl):
+    def do_update(self, line):
         """Updates an instance based on:
             - The class name
             - Id
         """
-        argl = split(argl, ' ')
+        line = split(line, ' ')
         all_instances = storage.all()
 
-        if len(argl) == 0:
+        if len(line) == 0:
             print("** class name missing **")
             return False
-        if argl[0] not in HBNBCommand.__cls:
+        if line[0] not in HBNBCommand.__cls:
             print("** class doesn't exist **")
             return False
-        if len(argl) == 1:
+        if len(line) == 1:
             print("** instance id missing **")
             return False
-        if "{}.{}".format(argl[0], argl[1]) not in all_instances.keys():
+        if "{}.{}".format(line[0], line[1]) not in all_instances.keys():
             print("** no instance found **")
             return False
-        if len(argl) == 2:
+        if len(line) == 2:
             print("** attribute name missing **")
             return False
-        if len(argl) == 3:
+        if len(line) == 3:
             try:
-                type(eval(argl[2])) != dict
+                type(eval(line[2])) != dict
             except NameError:
                 print("** value missing **")
                 return False
 
-        cls_id = "{}.{}".format(argl[0], argl[1])
+        cls_id = "{}.{}".format(line[0], line[1])
         obj = all_instances[cls_id]
 
-        if len(argl) == 4:
-            if argl[2] in obj.__class__.__dict__.keys():
-                valtype = type(obj.__class__.__dict__[argl[2]])
-                obj.__dict__[argl[2]] = valtype(argl[3])
+        if len(line) == 4:
+            if line[2] in obj.__class__.__dict__.keys():
+                valtype = type(obj.__class__.__dict__[line[2]])
+                obj.__dict__[line[2]] = valtype(line[3])
             else:
-                obj.__dict__[argl[2]] = argl[3]
-        elif type(eval(argl[2])) == dict:
+                obj.__dict__[line[2]] = line[3]
+        elif type(eval(line[2])) == dict:
             typ = [str, int, float]
-            for k, v in eval(argl[2]).items():
+            for k, v in eval(line[2]).items():
                 if (k in obj.__class__.__dict__.keys() and
                         type(obj.__class__.__dict__[k]) in typ):
                     valtype = type(obj.__class__.__dict__[k])
