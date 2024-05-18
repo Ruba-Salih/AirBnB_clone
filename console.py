@@ -5,8 +5,12 @@ import re
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
+from models.state import State
 from models.user import User
-
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -18,11 +22,11 @@ class HBNBCommand(cmd.Cmd):
     __cls = {
         "BaseModel": BaseModel,
         "User": User,
-        "State": 0,
-        "City": 0,
-        "Place": 9,
-        "Amenity": 8,
-        "Review": 6
+        "State": State,
+        "City": City,
+        "Place": Place,
+        "Amenity": Amenity,
+        "Review": Review
         }
 
     def emptyline(self):
