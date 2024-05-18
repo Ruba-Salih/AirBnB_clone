@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ HBNBCommand class definition """
 import cmd
+import re
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
@@ -31,11 +32,14 @@ class HBNBCommand(cmd.Cmd):
     """-------COMMANDS------"""
 
     def do_EOF(self, line):
-        """EOF command to exit the program"""
+        """EOF command to exit the program
+        """
+        print("")
         return True
 
     def do_quit(self, line):
-        """Quit command to exit the program"""
+        """Quit command to exit the program
+        """
         return True
 
     def do_create(self, line):
@@ -179,6 +183,29 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     obj.__dict__[k] = v
         storage.save()
+
+    def default(self, line):
+        """Default behavior invalid input
+        """
+        methods = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "count": self.do_count,
+            "update": self.do_update
+        }
+        match = re.search(r"\.", line)
+        if match is not None:
+            argl = [line[:match.span()[0]], line[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", argl[1])
+            if match is not None:
+                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in methods.keys():
+                    call = "{} {}".format(argl[0], command[1])
+                    return methods[command[0]](call)
+        print("*** Unknown syntax: {}".format(line))
+
+        return False
 
 
 if __name__ == '__main__':
