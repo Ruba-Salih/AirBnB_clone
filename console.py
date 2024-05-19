@@ -211,7 +211,7 @@ class HBNBCommand(cmd.Cmd):
 
         return False
 
-    def count(self, line):
+    def do_count(self, line):
         """Retrieve the number of instances of a class
         """
         coun = 0
