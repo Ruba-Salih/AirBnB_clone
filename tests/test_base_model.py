@@ -22,7 +22,7 @@ class TestBase(unittest.TestCase):
     def test_created_at_type(self):
         """Check for created_at type."""
         self.assertEqual(datetime, type(BaseModel().created_at))
-    
+
     def test_updated_at_type(self):
         """Check for updated_at type."""
         self.assertEqual(datetime, type(BaseModel().updated_at))
@@ -34,7 +34,7 @@ class TestBase(unittest.TestCase):
         sleep(0.05)
         BaseModel().save()
         self.assertLess(old, BaseModel().updated_at)
-    
+
     def test_str(self):
         """Check for save method."""
         dt = datetime.today()
@@ -47,7 +47,6 @@ class TestBase(unittest.TestCase):
         self.assertIn("'id': '123'", bmstr)
         self.assertIn("'created_at': " + dt_repr, bmstr)
         self.assertIn("'updated_at': " + dt_repr, bmstr)
-
 
 
 if __name__ == '__main__':
