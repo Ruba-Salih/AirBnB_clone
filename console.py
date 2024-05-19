@@ -211,6 +211,19 @@ class HBNBCommand(cmd.Cmd):
 
         return False
 
+    def count(self, line):
+        """Retrieve the number of instances of a class
+        """
+        coun = 0
+        line = split(line, " ")
+
+        all_instances = storage.all()
+        for key in all_instances:
+            name = key.split('.')
+            if name[0] == line[0]:
+                coun += 1
+        print(coun)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
