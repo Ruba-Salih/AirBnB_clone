@@ -29,7 +29,7 @@ class FileStorage:
         Args:
             obj: a class object
         """
-        __class__.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        __class__.__objects["{}.{}".format(type(obj).__name__, obj.id)] = obj
 
     def save(self):
         """
@@ -49,9 +49,9 @@ class FileStorage:
             with open(__class__.__file_path, 'r') as f:
                 dic_ob = json.load(f)
                 for i in dic_ob.values():
-                    cls_name = i["__class__"]
+                    name = i["__class__"]
                     del i["__class__"]
-                    self.new(eval(cls_name)(**i))
+                    self.new(eval(name)(**i))
 
         except FileNotFoundError:
             pass
