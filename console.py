@@ -188,7 +188,28 @@ class HBNBCommand(cmd.Cmd):
                     obj.__dict__[k] = v
         storage.save()
 
-    
+    def default(self, line):
+        """Retrieve all instances of a class
+        """
+        methods = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "count": self.do_count,
+            "update": self.do_update
+        }
+
+        match = re.search(r"\.", line)
+
+        if match is not None:
+            argl = [line[:match.span()[0]], line[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", argl[1])
+            if match is not None:
+                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in methods.keys():
+                    call = "{} {}".format(argl[0], command[1])
+                    return methods[command[0]](call)
+
         return False
 
     def do_count(self, line):
