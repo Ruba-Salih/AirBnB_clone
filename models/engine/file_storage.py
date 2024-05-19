@@ -29,7 +29,7 @@ class FileStorage:
         Args:
             obj: a class object
         """
-        __class__.__objects["{}.{}".format(type(obj).__name__, obj.id)] = obj
+        __class__.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
         """
